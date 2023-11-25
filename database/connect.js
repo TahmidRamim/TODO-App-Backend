@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
 export const connect = () => {
-  mongoose.connect("mongodb://localhost:27017/task-manager-api");
+  mongoose.connect(process.env.MONGO_URI);
+  console.log();
 };
