@@ -7,9 +7,15 @@ export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(400).send("User doesn't exists");
+      return res.status(400).send({
+        success: false,
+        message: "User doesn't exists",
+      });
     } else if (user.password !== req.body.password) {
-      return res.status(400).send("Password doesn't match");
+      return res.status(400).send({
+        success: false,
+        message: "Password doesn't match",
+      });
     } else {
       const token = jwt.sign(
         { email: user.email, id: user._id },
