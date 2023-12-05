@@ -7,13 +7,12 @@ import { router } from "./routers/user.js";
 export const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:5173'],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
 
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
 app.use("/api/v1/user/", router);
 app.use("/api/v1/task/", taskRouter);
 app.use(ErrorHandler);
